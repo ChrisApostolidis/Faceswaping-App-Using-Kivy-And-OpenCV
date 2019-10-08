@@ -1,0 +1,258 @@
+#: import Factory kivy.factory.Factory
+ScreenManager:
+    TestLayout:
+        name: "main"
+    VideoWindow:
+        name: "vidwindow"
+
+
+
+
+<TestLayout>:
+
+
+    GridLayout:
+
+        name: "main"
+
+        cols: 1
+        rows : 3
+        size: root.width, root.height
+
+        GridLayout:
+            cols:3
+            size_hint: 1 , .3
+            Button:
+                text: "?"
+                size_hint: .08 , 1
+                on_release: root.btnShowHint()
+
+            Label:
+                text: "FaceswApp"
+
+            Button:
+                text:"Video Faceswapp"
+                background_normal : ''
+                background_color: .93 , .81 , .7 , 1
+                size_hint: .2 , 1
+                on_release: 
+                    app.root.current = "vidwindow" 
+                    root.manager.transition.direction = "left"
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing : 10
+            cols:2
+
+            Image:
+                id: img1
+                source: 'bradley_cooper.jpg'
+                size: root.width, root.height
+            Button:
+                text: "Swap Images"
+                size_hint: .3 , .2
+                center_y: self.parent.center_y
+                on_release: root.swapImagesPlace()
+            Image:
+                id: img2
+                source: 'jim_carrey.jpg'
+                size: root.width, root.height
+
+        GridLayout:
+            cols:3
+            size_hint: 1 , .3
+
+            Button:
+                text: "Insert Image 1"
+                on_release: root.btnImg1()
+                   
+
+            Button:
+                text: "Insert Image 2"
+                on_release: root.btnImg2()
+            Button:
+                text: "Faceswapp"
+                on_release: root.btnFaceswapp()
+
+
+
+<VideoWindow>:
+    GridLayout:
+        name: "vidwindow"
+
+        cols: 1
+        rows : 3
+        size: root.width, root.height
+
+        GridLayout:
+            cols:2
+            size_hint: 1 , .3
+            
+            Label:
+                text: "FaceswApp Video"
+
+            Button:
+                text:"Photo Faceswapp"
+                size_hint: .2 , 1
+                on_release: 
+                    app.root.current = "main" 
+                    root.manager.transition.direction = "right"
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing : 10
+            cols:1
+
+            Image:
+                id: img_vid
+                source: root.img_path
+                size: root.width, root.height
+
+            
+
+        GridLayout:
+            cols:2
+            size_hint: 1 , .3
+
+            Button:
+                text: "Insert Image"
+                on_release: root.btnImg()
+
+            
+
+            Button:
+                text: "Faceswapp"
+                on_release: root.vidFaceswapp()
+
+<PI>:
+    auto_dismiss: True
+    title: "" 
+    separator_height: 0 
+    cols:1
+    BoxLayout:
+        orientation: "horizontal"
+        cols:2
+        Button:
+            text: "Open Image"
+            text_size: self.size
+            halign: "center"
+            valign: 'bottom'
+            size_hint: 1 , 1
+            on_release: root.openFcPopup()
+                
+            Image:
+                source: "gallery.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 50, 50
+                allow_strech: True
+            
+            
+        Button:
+            text: "Capture Image"
+            text_size: self.size
+            halign: "center"
+            valign: 'bottom'
+            size_hint: 1 , 1
+            on_release: root.openCamPopup()
+               
+               
+            Image:
+                source: "camera.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 50, 50
+                allow_strech: True
+            
+<CameraClick>:
+    
+    auto_dismiss: False
+    title: "" 
+    separator_height: 0 
+    BoxLayout:
+        
+        orientation: 'vertical'
+        Camera:
+            id: camera
+            resolution: (640, 480)
+            play: True
+
+        
+        Button:
+            text: 'Capture'
+            size_hint_y: None
+            height: '48dp'
+            on_press: 
+                root.capture()
+              
+                
+             
+                
+<TheFileChooser>:
+    fciv: fciv
+    label: label
+    cl_fc: cl_fc
+
+    name: "fchooser"
+    orientation: 'vertical'
+    FileChooserIconView: 
+        id: fciv
+        on_selection: root.select(*args)
+
+    Label:
+        id: label
+        size_hint_y: .1
+        canvas.before:
+            Color:
+                rgb: .5,.4,.5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    Button:
+        id: cl_fc
+        size_hint_y: .1
+        text: "Open Image"
+        on_release: 
+            root.doStuff()
+
+                
+<FaceswappedImage>:
+    orientation: "vertical"
+    Image:
+        id: swappedImg
+        source: root.fswappedImage
+    BoxLayout:
+        size_hint: 1 , .3
+        orientation: 'horizontal'
+        Button:
+            text: "Save Image" 
+            on_release: root.saveImage()
+        
+        Button:
+            text: "Close Popup"
+            on_release: root.closeFsPp()
+
+<FaceswappedVideo>:
+    orientation: "vertical"
+    Image:
+        id: swappedVidImg
+        source: root.vfswappedImage
+    BoxLayout:
+        size_hint: 1 , .3
+        orientation: 'horizontal'
+        Button:
+            text: "Save Image" 
+            on_release: root.saveImage()
+        
+        Button:
+            text: "Close Popup"
+            on_release: root.closeFsvPp()
+
+<HintPopup>:
+    orientation: 'vertical'
+    Label:
+        text: "Make sure you take/open clear images"
+    Button: 
+        text: "Close Instructions"
+        size_hint: 1 , .2
+        on_release: root.closePP()
