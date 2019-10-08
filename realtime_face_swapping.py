@@ -31,7 +31,7 @@ class VideoFaceswapp():
 
         # Face 1
         faces = detector(img_gray)
-        #landmarks_points = []
+        
         for face in faces:
             landmarks = predictor(img_gray, face)
             landmarks_points = []
@@ -40,11 +40,11 @@ class VideoFaceswapp():
                 y = landmarks.part(n).y
                 landmarks_points.append((x, y))
 
-                # cv2.circle(img, (x, y), 3, (0, 0, 255), -1)
+         
 
             points = np.array(landmarks_points, np.int32)
             convexhull = cv2.convexHull(points)
-            # cv2.polylines(img, [convexhull], True, (255, 0, 0), 3)
+
             cv2.fillConvexPoly(mask, convexhull, 255)
 
             face_image_1 = cv2.bitwise_and(img, img, mask=mask)
@@ -90,13 +90,13 @@ class VideoFaceswapp():
                 faces2 = detector(img2_gray)
                 for face in faces2:
                     landmarks = predictor(img2_gray, face)
-                    # landmarks_points2 = []
+                   
                     for n in range(0, 68):
                         x = landmarks.part(n).x
                         y = landmarks.part(n).y
                         landmarks_points2.append((x, y))
 
-                    # cv2.circle(img2, (x, y), 3, (0, 255, 0), -1)
+                 
                     points2 = np.array(landmarks_points2, np.int32)
                     convexhull2 = cv2.convexHull(points2)
             
