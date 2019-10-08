@@ -8,7 +8,6 @@ from realtime_face_swapping import VideoFaceswapp as vfs
 from kivy.uix.screenmanager import ScreenManager,Screen
 from kivy.uix.popup import Popup
 from kivy.core.camera import Camera
-#from kivy.uix.camera import Camera
 from kivy.properties import ObjectProperty
 from kivy.uix.filechooser import FileChooserIconView
 from PIL import Image
@@ -19,9 +18,6 @@ class FaceswappedVideo(BoxLayout):
     vfswappedImage = None
 
     def openFsvPp(self):
-        #self.fswappedImage = img
-        #self.ids['swappedVigImg'].texture = txture
-        #self.ids['swappedVidImg'].reload()
  
         self.pup = Popup(title="Result",content=self)
         self.pup.open()
