@@ -4,6 +4,8 @@ This project was developed as my diplomatic essay for the Bachelor degree in Com
 
 Most of the code used for the faceswaping functions was either developed following the tutorial, or downloaded and refactored as necessary, from this online repository: https://pysource.com/2019/04/04/face-swapping-opencv-with-python-part-1/
 
+In order for the app to run, it needs one more file, which can be found on: https://github.com/AKSHAYUBHAT/TensorFace/blob/master/openface/models/dlib/shape_predictor_68_face_landmarks.dat
+
 The GUI was developed using the Kivy library.
 
 Chris Apostolidis, 2019
